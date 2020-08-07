@@ -7,7 +7,7 @@
 
   <div class="dropdown">
     <a href="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle" data-toggle="modal" type="button"><i class="ti-user"></i><%= @current_user.name.capitalize %> </a>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <div class="dropdown-menu submenu" aria-labelledby="dropdownMenuButton">
       <%= link_to "Profile", @current_user,:class=>"dropdown-item" %>
       <%= link_to "Log out", logout_path, method: "delete",:class=>"dropdown-item" %>
       <!--      <a class="dropdown-item" href="#">Another action</a>-->
@@ -21,6 +21,12 @@
       outline: medium none;
     }
     .dropdown-menu a:hover {background-color: #ddd;}
+     .dropdown-menu {
+       border-top: 5px solid #2d3092;
+       width: 145px !important;
+       /*background: rgba(255,255,255,0.8) !important;*/
+
+     }
   </style>
 <% end %>
 
