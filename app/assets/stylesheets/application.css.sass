@@ -1,3 +1,6 @@
+@import "bootstrap-sprockets"
+@import "bootstrap"
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -13,58 +16,50 @@
  *= require_tree .
  *= require_self
  */
+#wrapper
+  margin-top: 50px
 
-#wrapper {
-    margin-top:50px;
-}
+a
+  color: #cc0000
 
+  &:visited, &:active
+    color: #cc0000
 
-a, a:visited,a:active{
-    color:#cc0000
-}
+  &:hover
+    color: #ee0000
+    background-color: transparent
 
-a:hover {
-    color:#ee0000;
-    background-color: transparent;
-}
+.btn-primary
+  background-color: #cc0000
+  border-color: #cc0000
 
+  &:hover
+    background-color: #ee0000
+    border-color: #ee0000
 
-.btn-primary {
- background-color: #cc0000;
-    border-color: #cc0000;
-}
-.btn-primary:hover {
-    background-color: #ee0000;
-    border-color: #ee0000;
-}
+  &:active
+    background-color: #cc0000
+    border-color: #cc0000
 
-.btn-primary:active {
-    background-color: #cc0000;
-    border-color: #cc0000;
-}
-
-a{
-    text-decoration: underline;
-}
+a
+  text-decoration: underline
 
 .navbar-default
-{
-    background-color: #cc0000;
-    border-color: #cc0000;
-    color:white;
-}
+  background-color: #cc0000
+  border-color: #cc0000
+  color: white
 
-.navbar-default  li a, .navbar-default li a:visited, .dropdown-toggle  {
-    color:white
-}
+  li a
+    color: white
 
-.white {
-    color:white;
-}
+    &:visited
+      color: white
 
-#alert{
-    color:red;
-}
-#notice {
-    color:green;
-}
+.dropdown-toggle, .white
+  color: white
+
+#alert
+  color: red
+
+#notice
+  color: greenss
