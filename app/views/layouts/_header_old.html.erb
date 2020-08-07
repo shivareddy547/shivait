@@ -1,0 +1,52 @@
+<header class="navbar navbar-fixed-top navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <img alt="Brand" src="https://brand.ncsu.edu/assets/logos/ncstate-brick-4x1-red-min.png">
+          </a>
+        </div>
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+
+        <% if logged_in? %>
+        <% if @role=="student" %>
+          <li> <%= link_to "Search", course_path,{'style'=>'color:white'}%> </li>
+          <li> <%= link_to "My Courses", mycourses_path,{'style'=>'color:white'}%> </li>
+          <li> <%= link_to "Course History", {controller: "course", action:"coursehistory"},{'style'=>'color:white'} %> </li>
+          <li> <%= link_to "Messages", message_path,{'style'=>'color:white'}%> </li>
+
+
+        <% elsif @role=="admin" || @role=="superadmin"%>
+          <li> <%= link_to "Manage Admins", administrator_path%> </li>
+          <li> <%= link_to "Manage Instructors", {controller: "administrator" ,action:"instructorlist"},{'style'=>'color:white'}%> </li>
+          <li> <%= link_to "Manage Students", {controller: "administrator" ,action:"studentlist"},{'style'=>'color:white'}%> </li>
+          <li> <%= link_to "Manage Courses", {controller: "administrator" ,action:"courselist"},{'style'=>'color:white'}%> </li>
+          <li> <%= link_to "Messages", message_path,{'style'=>'color:white'}%> </li>
+
+
+        <% elsif @role=="instructor" %>
+          <li> <%= link_to "Enrollment requests", requests_path,{'style'=>'color:white'}%> </li>
+          <li> <%= link_to "Courses", mycourses_path,{'style'=>'color:white'}%> </li>
+          <li> <%= link_to "Messages", message_path,{'style'=>'color:white'} %> </li>
+        <% end%>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle cwhite" style="color:white; background-color: #cc0000" data-toggle="dropdown">
+              <%= @current_user.name %> <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu cwhite" style="background-color: #cc0000">
+              <li><%= link_to "Profile", @current_user %></li>
+              <li class="divider"></li>
+              <li>
+                <%= link_to "Log out", logout_path, method: "delete" %>
+              </li>
+            </ul>
+          </li>
+
+        <% else %>
+          <li><%= link_to "Log in", login_path,{'style'=>'color:white'} %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -1,52 +1,80 @@
-<header class="navbar navbar-fixed-top navbar-default">
-  <div class="container">
-    <div class="navbar-header">
-          <a class="navbar-brand" href="#">
-            <img alt="Brand" src="https://brand.ncsu.edu/assets/logos/ncstate-brick-4x1-red-min.png">
-          </a>
+<header>
+  <!-- Header Start -->
+  <div class="header-area">
+    <div class="main-header ">
+      <div class="header-top d-none d-lg-block">
+        <!-- Left Social -->
+        <div class="header-left-social">
+          <ul class="header-social">
+            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+            <li><a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a></li>
+            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+            <li> <a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+          </ul>
         </div>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-
-        <% if logged_in? %>
-        <% if @role=="student" %>
-          <li> <%= link_to "Search", course_path,{'style'=>'color:white'}%> </li>
-          <li> <%= link_to "My Courses", mycourses_path,{'style'=>'color:white'}%> </li>
-          <li> <%= link_to "Course History", {controller: "course", action:"coursehistory"},{'style'=>'color:white'} %> </li>
-          <li> <%= link_to "Messages", message_path,{'style'=>'color:white'}%> </li>
-
-
-        <% elsif @role=="admin" || @role=="superadmin"%>
-          <li> <%= link_to "Manage Admins", administrator_path%> </li>
-          <li> <%= link_to "Manage Instructors", {controller: "administrator" ,action:"instructorlist"},{'style'=>'color:white'}%> </li>
-          <li> <%= link_to "Manage Students", {controller: "administrator" ,action:"studentlist"},{'style'=>'color:white'}%> </li>
-          <li> <%= link_to "Manage Courses", {controller: "administrator" ,action:"courselist"},{'style'=>'color:white'}%> </li>
-          <li> <%= link_to "Messages", message_path,{'style'=>'color:white'}%> </li>
-
-
-        <% elsif @role=="instructor" %>
-          <li> <%= link_to "Enrollment requests", requests_path,{'style'=>'color:white'}%> </li>
-          <li> <%= link_to "Courses", mycourses_path,{'style'=>'color:white'}%> </li>
-          <li> <%= link_to "Messages", message_path,{'style'=>'color:white'} %> </li>
-        <% end%>
-
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle cwhite" style="color:white; background-color: #cc0000" data-toggle="dropdown">
-              <%= @current_user.name %> <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu cwhite" style="background-color: #cc0000">
-              <li><%= link_to "Profile", @current_user %></li>
-              <li class="divider"></li>
-              <li>
-                <%= link_to "Log out", logout_path, method: "delete" %>
-              </li>
-            </ul>
-          </li>
-
-        <% else %>
-          <li><%= link_to "Log in", login_path,{'style'=>'color:white'} %></li>
-        <% end %>
-      </ul>
-    </nav>
+        <div class="container">
+          <div class="col-xl-12">
+            <div class="row d-flex justify-content-between align-items-center">
+              <div class="header-info-left">
+                <ul>
+                  <li>shivait.acadamy@gmail.com</li>
+                  <li>+919790918533</li>
+                </ul>
+              </div>
+              <div class="header-info-right">
+                <%= render partial: "layouts/login" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="header-bottom header-sticky">
+        <!-- Logo -->
+        <div class="logo d-none d-lg-block">
+          <a href="/"><img src="/assets/logo/logo.png" alt=""></a>
+        </div>
+        <div class="container">
+          <div class="menu-wrapper">
+            <!-- Logo -->
+            <div class="logo logo2 d-block d-lg-none">
+              <a href="index.html"><img src="/assets/logo/logo.png" alt=""></a>
+            </div>
+            <!-- Main-menu -->
+            <div class="main-menu d-none d-lg-block">
+              <nav>
+                <ul id="navigation">
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/static_pages/about">About</a></li>
+                  <li><a href="courses.html">Courses</a></li>
+                  <li><a href="instructor.html">Instructors</a></li>
+                  <li><a href="blog.html">Blog</a>
+                    <ul class="submenu">
+                      <li><a href="blog.html">Blog</a></li>
+                      <li><a href="blog_details.html">Blog Details</a></li>
+                      <li><a href="elements.html">Element</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="/static_pages/contact_us">Contact</a></li>
+                </ul>
+              </nav>
+            </div>
+            <!-- Header-btn -->
+            <div class="header-search d-none d-lg-block">
+              <form action="#" class="form-box f-right ">
+                <input type="text" name="Search" placeholder="Search Courses">
+                <div class="search-icon">
+                  <i class="fas fa-search special-tag"></i>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- Mobile Menu -->
+          <div class="col-12">
+            <div class="mobile_menu d-block d-lg-none"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  <!-- Header End -->
 </header>

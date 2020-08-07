@@ -1,5 +1,5 @@
 class AdministratorController < ApplicationController
-
+  layout 'admin'
   # TODO: implement edit
 
   def index

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ClassProject</title>
+  <%= stylesheet_link_tag    'old_design', media: 'all', 'data-turbolinks-track' => true %>
+  <link href="https://cdn.ncsu.edu/brand-assets/fonts/include.css"
+        rel="stylesheet" type="text/css" />
+  <%= javascript_include_tag 'old_design', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <!--[if lt IE 9]>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+  </script>
+  <![endif]-->
+</head>
+<body>
+<%= render 'layouts/header_old' %>
+<div class="container" id="wrapper">
+  <%= yield %>
+</div>
+</body>
+</html>
