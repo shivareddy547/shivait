@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 #to use has_secure_password
 #
-
+ruby '~> 2.4.7'
+gem 'bundler', '~>1.17.3'
 gem 'bcrypt', '~> 3.1.7'
 # gem "bootstrap-sass", "2.3.1.1"
 # gem 'bootstrap-sass', '3.2.0.2'
