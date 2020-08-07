@@ -18,8 +18,7 @@
   </div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">Time & Duration</li>
-    <li class="list-group-item">Instuctor</li>
-
+    <li class="list-group-item">Instructor : <%= course.users.where("role='instructor'").map(&:name).join(',') rescue ""%> </li>
 
     <%current_user%>
     <% if @current_user.present?  %>
