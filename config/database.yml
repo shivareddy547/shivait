@@ -81,8 +81,6 @@ development:
 #   production:
 #     url: <%#= ENV['DATABASE_URL'] %>
 
-#production:
-#  <<: *default
-#  database: rails_react_recipe_production
-#  username: rails_react_recipe
-#  password: <%#= ENV['RAILS_REACT_RECIPE_DATABASE_PASSWORD'] %>
+production:
+  <<: *default
+  database: ClassPortal1_development
