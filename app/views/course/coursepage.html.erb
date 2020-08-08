@@ -14,7 +14,7 @@
 <p><%= @course.endDate %></p>
 <p><b>Status:</b></p>
 <p><%= @course.status %></p>
-
+<p> <%= image_tag(@course.cover.url) if @course.cover %></p>
 
 
 <% if @role!="student" && @course.status=='active' %>

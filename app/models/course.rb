@@ -1,4 +1,5 @@
 class Course < ActiveRecord::Base
+  mount_uploader :cover, CoverUploader
   validates :number, :presence => true
   validates :title, :presence => true
   validates :desc, :presence => true
