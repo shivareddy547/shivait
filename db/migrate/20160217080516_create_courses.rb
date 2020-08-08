@@ -4,8 +4,8 @@ class CreateCourses < ActiveRecord::Migration
       t.string :number
       t.string :title
       t.string :desc
-      t.date :startDate
-      t.date :endDate
+      t.datetime :startDate
+      t.datetime :endDate
       t.string :status
 
       t.timestamps null: false

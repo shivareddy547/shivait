@@ -41,7 +41,7 @@ class AdministratorController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:number, :title, :desc,:startDate,:endDate,:status)
+    params.require(:course).permit(:number, :title, :desc,:startDate,:endDate,:status,:cover)
   end
 
 
