@@ -8,49 +8,103 @@
 <!--</div>-->
 
 <% if  @course.present? %>
-<% @course.each do |course| %>
 
-<div class="card" >
-  <img class="card-img-top" src="/assets/course/download.svg"?text=Image cap" alt="Card image cap">
+<div class="card">
+  <h5 class="card-header">Courses</h5>
   <div class="card-body">
-    <h5 class="card-title"><%= course.title %></h5>
-    <p class="card-text"><%= course.desc %></p>
+    <div class="card-deck">
+    <% @course.each do |course| %>
+    <div class="card" style="">
+      <img class="card-img-top" src="<%= course.cover.url %>" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title"><%= course.title %></h5>
+        <p class="card-text"><%= course.desc %></p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Time & Duration</li>
+        <li class="list-group-item">Instructor : <%= course.users.where("role='instructor'").map(&:name).join(',') rescue ""%> </li>
+        <%current_user%>
+        <% if @current_user.present?  %>
+          <% @pending= Request.where(course_id: course, user_id:@current_user).first%>
+          <%if @pending %>
+            <!--    <p class="card-text"><%#= 'Pending' %></p>-->
+            <li class="list-group-item">Status : <%= 'Pending' %></li>
+          <%elsif  course.in?(@current_user.courses)%>
+            <!--    <p>%='Enrolled'%></p>-->
+            <li class="list-group-item">Status : <%= 'Enrolled' %></li>
+          <%else%>
+            <li class="list-group-item">Status :
+              <%= link_to 'Enroll', {controller:'request', action: 'requestenroll', course_id: course, user_id: @current_user},style: "color:#007bff" %>
+            </li>
+          <%end%>
+        <% else %>
+          <%#= link_to 'Enroll', {controller:'request', action: 'requestenroll', course_id: course, user_id: @current_user},style: "color:#007bff" %>
+          <li class="list-group-item"><a href="" class="" data-toggle="modal" data-target="#modalLoginForm" style="color:#007bff"> Enroll</a></li>
+        <%end%>
+      </ul>
+      <div class="card-body">
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+      </div>
+    </div>
+  <% end %>
+    </div>
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Time & Duration</li>
-    <li class="list-group-item">Instructor : <%= course.users.where("role='instructor'").map(&:name).join(',') rescue ""%> </li>
+</div>
 
-    <%current_user%>
-    <% if @current_user.present?  %>
-  <% @pending= Request.where(course_id: course, user_id:@current_user).first%>
-  <%if @pending %>
+<% else %>
+    <div class="alert alert-info" style="width: 66rem;margin-left: 310px;" role="alert">
+      Currently No Courses Avialable,Please contact Administrator..!
+    </div>
+<%end %>
+
+
+
+
+<%# if  @course.present? %>
+<%# @course.each do |course| %>
+
+<!--<div class="card" >-->
+<!--  <img class="card-img-top" src="<%#= course.cover.url %>?text=Image cap" alt="Card image cap">-->
+<!--  <div class="card-body">-->
+<!--    <h5 class="card-title"><%#= course.title %></h5>-->
+<!--    <p class="card-text"><%#= course.desc %></p>-->
+<!--  </div>-->
+<!--  <ul class="list-group list-group-flush">-->
+<!--    <li class="list-group-item">Time & Duration</li>-->
+<!--    <li class="list-group-item">Instructor : <%#= course.users.where("role='instructor'").map(&:name).join(',') rescue ""%> </li>-->
+
+    <%#current_user%>
+    <%# if @current_user.present?  %>
+  <%# @pending= Request.where(course_id: course, user_id:@current_user).first%>
+  <%#if @pending %>
 <!--    <p class="card-text"><%#= 'Pending' %></p>-->
-      <li class="list-group-item">Status : <%= 'Pending' %></li>
-  <%elsif  course.in?(@current_user.courses)%>
+<!--      <li class="list-group-item">Status : <%#= 'Pending' %></li>-->
+  <%#elsif  course.in?(@current_user.courses)%>
 <!--    <p>%='Enrolled'%></p>-->
-      <li class="list-group-item">Status : <%= 'Enrolled' %></li>
-  <%else%>
-      <li class="list-group-item">Status :
-    <%= link_to 'Enroll', {controller:'request', action: 'requestenroll', course_id: course, user_id: @current_user},style: "color:#007bff" %>
-      </li>
-  <%end%>
-    <% else %>
+<!--      <li class="list-group-item">Status : <%#= 'Enrolled' %></li>-->
+  <%#else%>
+<!--      <li class="list-group-item">Status :-->
+    <%#= link_to 'Enroll', {controller:'request', action: 'requestenroll', course_id: course, user_id: @current_user},style: "color:#007bff" %>
+<!--      </li>-->
+  <%#end%>
+    <%# else %>
       <%#= link_to 'Enroll', {controller:'request', action: 'requestenroll', course_id: course, user_id: @current_user},style: "color:#007bff" %>
-      <li class="list-group-item"><a href="" class="" data-toggle="modal" data-target="#modalLoginForm" style="color:#007bff"> Enroll</a></li>
-    <%end%>
+<!--      <li class="list-group-item"><a href="" class="" data-toggle="modal" data-target="#modalLoginForm" style="color:#007bff"> Enroll</a></li>-->
+    <%#end%>
 
-  </ul>
+<!--  </ul>-->
 <!--  <div class="card-body">-->
 <!--    <a href="#" class="">Enroll</a>-->
 <!--  </div>-->
-</div>
+<!--</div>-->
 
-  <% end %>
-<% else %>
-  <div class="alert alert-info" style="width: 66rem;margin-left: 310px;" role="alert">
-    Currently No Courses Avialable,Please contact Administrator..!
-  </div>
-<% end  %>
+  <%# end %>
+<%# else %>
+<!--  <div class="alert alert-info" style="width: 66rem;margin-left: 310px;" role="alert">-->
+<!--    Currently No Courses Avialable,Please contact Administrator..!-->
+<!--  </div>-->
+<%# end  %>
 
 <!--<div class="card">-->
 <!--  <h5 class="card-header">Featured</h5>-->
@@ -124,24 +178,24 @@
 
 <!--</body>-->
 
-<style>
-  /*@media only screen and (min-width: 750px) {*/
+<!--<style>-->
+<!--  /*@media only screen and (min-width: 750px) {*/-->
 
-  /*  .login_register{*/
-  /*    display: none;*/
-  /*  }*/
-  /*}*/
-
-
-    .card {
-      padding: 5% !important;
-    }
-
-  .login_register{
-    display: none;
-  }
+<!--  /*  .login_register{*/-->
+<!--  /*    display: none;*/-->
+<!--  /*  }*/-->
+<!--  /*}*/-->
 
 
+<!--    .card {-->
+<!--      padding: 5% !important;-->
+<!--    }-->
+
+<!--  .login_register{-->
+<!--    display: none;-->
+<!--  }-->
 
 
-</style>
+
+
+<!--</style>-->

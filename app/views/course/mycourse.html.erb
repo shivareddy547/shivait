@@ -1,4 +1,83 @@
 
+
+
+<% if  @course.present? %>
+
+  <div class="card">
+    <h5 class="card-header"><%= @heading %></h5>
+    <div class="card-body">
+      <div class="card-deck">
+        <% @course.each do |course| %>
+          <div class="card" style="">
+            <img class="card-img-top" src="<%= course.cover.url %>" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"><%= course.title %></h5>
+              <p class="card-text"><%= course.desc %></p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Time & Duration: <%= (course.endDate.to_datetime) %>hrs</li>
+              <li class="list-group-item">Instructor : <%= course.users.where("role='instructor'").map(&:name).join(',') rescue ""%> </li>
+              <%current_user%>
+              <% if @current_user.present?  %>
+                <% @pending= Request.where(course_id: course, user_id:@current_user).first%>
+                <%if @pending %>
+                  <!--    <p class="card-text"><%#= 'Pending' %></p>-->
+                  <li class="list-group-item">Status : <%= 'Pending' %></li>
+                <%elsif  course.in?(@current_user.courses)%>
+                  <!--    <p>%='Enrolled'%></p>-->
+                  <li class="list-group-item">Status : <%= 'Enrolled' %></li>
+                <%else%>
+                  <li class="list-group-item">Status :
+                    <%= link_to 'Enroll', {controller:'request', action: 'requestenroll', course_id: course, user_id: @current_user},style: "color:#007bff" %>
+                  </li>
+                <%end%>
+              <% else %>
+                <%#= link_to 'Enroll', {controller:'request', action: 'requestenroll', course_id: course, user_id: @current_user},style: "color:#007bff" %>
+                <li class="list-group-item"><a href="" class="" data-toggle="modal" data-target="#modalLoginForm" style="color:#007bff"> Enroll</a></li>
+              <%end%>
+              <%if @role=="instructor"%>
+
+                <li class="list-group-item">Requests:
+                  <%if course.inactive==0%>
+                    <%= link_to 'Request Inactive', {controller: 'instructor', action: 'requestinactive', id:course} %>
+                  <%else%>
+                    <%=  'Already Requested' %>
+                  <%end%>
+                </li>
+                <li class="list-group-item">Manage Students: <%= link_to 'Students', {action: 'coursestudent', controller: 'administrator', id:course}  %></li>
+
+
+              <% end %>
+              <%if @role=="student"%>
+                <li class="list-group-item">
+                  <%= link_to 'Drop', {action: 'studentcoursedrop', id:course} %>
+
+                </li>
+              <% end %>
+
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+<% else %>
+  <div class="alert alert-info" style="width: 66rem;margin-left: 310px;" role="alert">
+    <%= "No courses enrolled yet"%>
+  </div>
+<%end %>
+
+
+
+
+
+
+
 <h1><%= @heading %></h1>
 <body>
   <% if @course %>
